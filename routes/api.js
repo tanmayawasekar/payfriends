@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../controlers/auth');
 
 router.get('/find', function(req, res, next) {
 
@@ -15,25 +16,6 @@ router.post('/login', function(req, res) {
 
 });
 
-router.post('/register', function(req, res) {
-	const db = process.dbObject;
-	const col = db.collection('users');
-	col.insertOne({
-			emailId,
-			password,
-			firstName,
-			lastName,
-			phoneNumber
-		} = req.body)
-		.then((r, err) => {
-			if (err) {
-				return res.send(err);
-			}
-			return res.send(r);
-		})
-		.catch(err => {
-			return res.send(err);
-		})
-})
+router.post('/register', auth.registerUser);
 
 module.exports = router;
