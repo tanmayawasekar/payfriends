@@ -6,9 +6,12 @@
     "start": "set DEBUG=payfriends:* & node ./bin/www"
   },
   "dependencies": {
+    "babel-eslint": "^7.2.1",
+    "bcrypt": "^1.0.2",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
+    "eslint": "^3.19.0",
     "express": "~4.14.0",
     "jsonwebtoken": "^7.3.0",
     "mongodb": "^2.2.25",
