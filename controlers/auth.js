@@ -7,16 +7,22 @@ const utils = require('../helpers/utils');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-	registerUserLocal(req, res) {
-		userOperations.addOne(req.body)
-			.then((result, err) => {
+	registerUserLocal(req, res, next) {
+		utils.checkIfRequiredFieldsExists({
+				'objectToCheckIn': req.body,
+				'requiredFields': userOperations.requireFields,
+				'errMessage': 'Bad Request',
+				next
+			})
+			.then(result => userOperations.addOne(req.body))
+			.then((user, err) => {
 				if (err) {
 					return res.send(err);
 				}
-				return res.send(result);
+				return res.send(user);
 			})
 			.catch(err => {
-				return res.send(err);
+				return next(err);
 			});
 	},
 	loginUser(req, res, next) {
