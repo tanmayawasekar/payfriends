@@ -1,8 +1,4 @@
 module.exports = {
-  storeInReqObect(filedName, valueToStore, targetStore) {
-    targetStore[filedName] = valueToStore;
-    return targetStore;
-  },
 
   /**
    * @param {boolean, Object/Array, Object, Error, next} param0 
@@ -14,7 +10,6 @@ module.exports = {
     errMessage,
     next
   }) {
-    console.log('sendResponseIfTrue')
     if (condition) {
       responseObject.send(valueToSend);
     } else {
@@ -69,7 +64,7 @@ module.exports = {
     ignoreFields,
     next
   }) {
-    let flagThrowError;
+    let flagThrowError;//need a lot of improvement ------>
     requiredFields.forEach(function (field) {
       if (!objectToCheckIn[field] && ignoreFields.indexOf(field) === -1) {
         flagThrowError = true;

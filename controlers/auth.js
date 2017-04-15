@@ -36,17 +36,18 @@ module.exports = {
 			})
 			.then(result => userOperations.checkIfUserExists(req.body, next))
 			.then(user => utils.checkIfDataExists(user, 'Invalid Credentials', next))
-			.then(user => utils.storeInReqObect('user', user, req))
+			.then(user => Object.assign(req, {
+				user
+			}))
 			.then(({
 				user
 			}) => cryptography.comparePassword(req.body.password, user.password))
 			.then(result => utils.checkIfDataExists(result, 'Invalid Credentials', next))
-			.then(result => utils.storeInReqObect('authToken',
-				jwt.sign(req.user, process.jwt.key, {
-					'expiresIn': process.jwt.expirationTime
-				}), req.user))
+			.then(result => Object.assign(req.user, {
+				'authToken': jwt.sign(req.user, process.jwt.key)
+			}))
 			.then(result => utils.sendResponseIfTrue({
-				'condition': result,
+				'condition': result.authToken,
 				'valueToSend': req.user,
 				'responseObject': res,
 				'errMessage': 'Invalid Credentials',
