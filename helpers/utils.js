@@ -1,11 +1,6 @@
 module.exports = {
-  storeInReqObect(filedName, valueToStore, targetStore) {
-    targetStore[filedName] = valueToStore;
-    return targetStore;
-  },
-
   /**
-   * @param {boolean, Object/Array, Object, Error, next} param0 
+   * @param {boolean, Object/Array, Object, Error, next} param0
    */
   sendResponseIfTrue({
     condition,
@@ -14,7 +9,6 @@ module.exports = {
     errMessage,
     next
   }) {
-    console.log('sendResponseIfTrue')
     if (condition) {
       responseObject.send(valueToSend);
     } else {
@@ -46,7 +40,6 @@ module.exports = {
   },
 
   getErrorStatus(statusMessage) {
- console.log("statusMessage ", statusMessage);
     let status;
     switch (statusMessage) {
       case 'Invalid Credentials':
