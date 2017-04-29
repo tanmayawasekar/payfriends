@@ -1,14 +1,12 @@
 module.exports = {
-
   /**
-   * @param {boolean, Object/Array, Object, Error, next} param0 
+   * @param {boolean, Object/Array, Object, Error} param0
    */
   sendResponseIfTrue({
     condition,
     valueToSend,
     responseObject,
     errMessage,
-    next
   }) {
     if (condition) {
       responseObject.send(valueToSend);
@@ -41,7 +39,6 @@ module.exports = {
   },
 
   getErrorStatus(statusMessage) {
- console.log("statusMessage ", statusMessage);
     let status;
     switch (statusMessage) {
       case 'Invalid Credentials':
@@ -59,7 +56,7 @@ module.exports = {
 
   checkIfRequiredFieldsExists({
     objectToCheckIn,
-    requiredFields,
+    requiredFields, 
     errMessage,
     ignoreFields,
     next

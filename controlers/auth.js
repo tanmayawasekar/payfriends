@@ -37,14 +37,16 @@ module.exports = {
 			.then(result => userOperations.checkIfUserExists(req.body, next))
 			.then(user => utils.checkIfDataExists(user, 'Invalid Credentials', next))
 			.then(user => Object.assign(req, {
-				user
+				'user': user
 			}))
 			.then(({
 				user
 			}) => cryptography.comparePassword(req.body.password, user.password))
 			.then(result => utils.checkIfDataExists(result, 'Invalid Credentials', next))
 			.then(result => Object.assign(req.user, {
-				'authToken': jwt.sign(req.user, process.jwt.key)
+				'authToken': jwt.sign(req.user, process.jwt.key, {
+					'expiresIn': process.jwt.expirationTime
+				})
 			}))
 			.then(result => utils.sendResponseIfTrue({
 				'condition': result.authToken,
