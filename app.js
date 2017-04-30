@@ -20,6 +20,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+console.log('zzz')
 app.use(logger(':method :url :date :remote-addr :status :response-time'));
 //Security Middleware
 app.use(helmet());

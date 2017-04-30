@@ -29,8 +29,8 @@ gulp.task('server', () => {
 		pm2Config['exec_mode'] = 'cluster';
 		pm2Config['instances'] = 0; // number of instances for your clustered app, 0 means as much instances as you have CPU cores. a negative value means CPU cores - value (e.g -1 on a 4 cores machine will spawn 3 instances)
 		pm2Config['max_memory_restart'] = '250M'; // your app will be restarted by PM2 if it exceeds the amount of memory specified. human-friendly format : it can be “10M”, “100K”, “2G” and so on…
-		// pm2Config['out_file'] = "/var/log/snapameal/app.stdout.log";
-		// pm2Config['error_file'] = "/var/log/snapameal/app.stderr.log";
+		pm2Config['out_file'] = "";
+		pm2Config['error_file'] = "";
 	}
 
 	pm2.connect(true, function(err) {
