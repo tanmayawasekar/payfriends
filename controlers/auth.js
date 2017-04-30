@@ -11,8 +11,7 @@ module.exports = {
 		utils.checkIfRequiredFieldsExists({
 				'objectToCheckIn': req.body,
 				'requiredFields': userOperations.requireFields,
-				'errMessage': 'Bad Request',
-				next
+				'errMessage': 'Bad Request'
 			})
 			.then(result => userOperations.addOne(req.body))
 			.then((user, err) => {
@@ -31,8 +30,7 @@ module.exports = {
 				'objectToCheckIn': req.body,
 				'requiredFields': userOperations.requireFields,
 				'errMessage': 'Bad Request',
-				'ignoreFields': !req.body.emaildId ? 'emailId' : !req.body.phoneNumber ? 'phoneNumber' : '',
-				next
+				'ignoreFields': !req.body.emaildId ? 'emailId' : !req.body.phoneNumber ? 'phoneNumber' : ''
 			})
 			.then(result => userOperations.checkIfUserExists(req.body, next))
 			.then(user => utils.checkIfDataExists(user, 'Invalid Credentials', next))

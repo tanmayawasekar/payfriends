@@ -39,6 +39,7 @@ module.exports = {
   },
 
   getErrorStatus(statusMessage) {
+    console.log("statusMessage", statusMessage);
     let status;
     switch (statusMessage) {
       case 'Invalid Credentials':
@@ -56,22 +57,15 @@ module.exports = {
 
   checkIfRequiredFieldsExists({
     objectToCheckIn,
-    requiredFields, 
+    requiredFields,
     errMessage,
     ignoreFields,
-    next
   }) {
-    let flagThrowError;//need a lot of improvement ------>
-    requiredFields.forEach(function (field) {
-      if (!objectToCheckIn[field] && ignoreFields.indexOf(field) === -1) {
-        flagThrowError = true;
-      }
-    });
+
+    let flagThrowError = requiredFields.some((field) => !objectToCheckIn[field] && ignoreFields.indexOf(field) === -1)
 
     if (flagThrowError) {
-      return new Promise(function (resolve, reject) {
-        throw new Error(errMessage);
-      });
+      throw new Error(errMessage);
     } else {
       return Promise.resolve(true);
     }
