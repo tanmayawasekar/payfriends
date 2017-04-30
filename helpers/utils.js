@@ -15,7 +15,7 @@ module.exports = {
     }
   },
 
-  checkIfDataExists(data, errMessage, next) {
+  checkIfDataExists(data, errMessage) {
     let flagThrowError;
     if (data) {
       switch (data.constructor) {
@@ -38,18 +38,28 @@ module.exports = {
     }
   },
 
-  getErrorStatus(statusMessage) {
-    console.log("statusMessage", statusMessage);
+  getErrorStatus(err) {
     let status;
-    switch (statusMessage) {
+    switch (err.message) {
       case 'Invalid Credentials':
         status = 401;
         break;
       case 'Bad Request':
         status = 400;
         break;
+      case 'Unathorized':
+        status = 401;
+        break;
+      case 'Not Found':
+        status = 404;
+        break;
       default:
-        status = 500;
+        if (err.code) {
+          status = 409;
+        }
+        else {
+          status = 500;
+        }
         break;
     }
     return status;
@@ -62,7 +72,7 @@ module.exports = {
     ignoreFields,
   }) {
 
-    let flagThrowError = requiredFields.some((field) => !objectToCheckIn[field] && ignoreFields.indexOf(field) === -1)
+    let flagThrowError = requiredFields.some((field) => !objectToCheckIn[field] && ignoreFields.indexOf(field) === -1);
 
     if (flagThrowError) {
       throw new Error(errMessage);
@@ -81,11 +91,5 @@ module.exports = {
       }
     }
     return false;
-  },
-
-  JWTexcludedUrls() {
-    return [
-      '/api/login'
-    ];
   }
 };

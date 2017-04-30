@@ -1,8 +1,3 @@
-// import redisClient from './../config/redis';
-// import jwt from 'jsonwebtoken';
-// import { filterUrl } from './../helpers/filterUrl';
-// import { JWTexcludedUrls } from './../helpers/JWTexcludedUrls';
-
 const jwt = require('jsonwebtoken');
 
 module.exports.getToken = function (headers) {
@@ -10,9 +5,7 @@ module.exports.getToken = function (headers) {
     var authorization = headers.authorization;
     var part = authorization.split(' ');
 
-    if (part.length == 2) {
-      var token = part[1];
-
+    if (part.length === 2) {
       return part[1];
     } else {
       return null;
@@ -22,17 +15,9 @@ module.exports.getToken = function (headers) {
   }
 };
 
-module.exports.verifyToken = function (req, res, next) {
-
-};
-
-module.exports.getNewToken = function (user) {
-  return jwt.sign(user, process.jwt.key);
-};
-
-
 module.exports.JWTexcludedUrls = function () {
   return [
-    '/api/login'
+    /^\/api\/login/,
+    /^\/api\/register/
   ];
 };

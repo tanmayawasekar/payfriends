@@ -5,7 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const utils = require('./helpers/utils');
-const verifyJwtToken = require('./controlers/verifyJwtToken');
+const token = require('./controlers/token');
 const helmet = require('helmet');
 require('./config/allConfig');
 require('./models/users');
@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //verifyJwtToken
-app.use(verifyJwtToken);
+app.use(token.verifyJwtToken);
 
 //render routes
 app.use('/', index);
@@ -40,16 +40,18 @@ app.use('/users', users);
 //api routes
 app.use('/api', api);
 
+// app.use(sendNewToken);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-	const err = new Error('Route Not Found');
-	err.status = 404;
+	const err = new Error('Not Found');
 	next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-	err.status = utils.getErrorStatus(err.message);
+	console.log(err.stack);
+	err.status = utils.getErrorStatus(err);
 	err.message = err.status === 500 ? 'Internal Server Error' : err.message;
 	res.status(err.status);
 	res.send(err.message);

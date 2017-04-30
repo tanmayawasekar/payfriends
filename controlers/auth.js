@@ -32,26 +32,26 @@ module.exports = {
 				'errMessage': 'Bad Request',
 				'ignoreFields': !req.body.emaildId ? 'emailId' : !req.body.phoneNumber ? 'phoneNumber' : ''
 			})
-			.then(result => userOperations.checkIfUserExists(req.body, next))
-			.then(user => utils.checkIfDataExists(user, 'Invalid Credentials', next))
+			.then(result => userOperations.checkIfUserExists(req.body))
+			.then(user => utils.checkIfDataExists(user, 'Invalid Credentials'))
 			.then(user => Object.assign(req, {
 				'user': user
 			}))
 			.then(({
 				user
 			}) => cryptography.comparePassword(req.body.password, user.password))
-			.then(result => utils.checkIfDataExists(result, 'Invalid Credentials', next))
-			.then(result => Object.assign(req.user, {
-				'authToken': jwt.sign(req.user, process.jwt.key, {
+			.then(result => utils.checkIfDataExists(result, 'Invalid Credentials'))
+			.then(result =>{
+				 res.setHeader('X-Authorization', jwt.sign({
+					'emaildId': req.user.emailId
+				}, process.jwt.key, {
 					'expiresIn': process.jwt.expirationTime
-				})
-			}))
+				}));})
 			.then(result => utils.sendResponseIfTrue({
-				'condition': result.authToken,
+				'condition': true,
 				'valueToSend': req.user,
 				'responseObject': res,
-				'errMessage': 'Invalid Credentials',
-				'next': next
+				'errMessage': 'Invalid Credentials'
 			}))
 			.catch(err => next(err));
 
