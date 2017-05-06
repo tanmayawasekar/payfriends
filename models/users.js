@@ -46,15 +46,19 @@ process.db.then((db, err) => {
 module.exports.requireFields = ['password', 'emailId', 'phoneNumber'];
 
 module.exports.addOne = function (reqObject) {
-	const promise = cryptography.encrypt(reqObject.password)
+	if(reqObject.password) {
+		const promise = cryptography.encrypt(reqObject.password)
 		.then(encryptedPassword => {
 			reqObject.password = encryptedPassword;
 			return reqObject;
 		})
-		.then(reqObject => getUserModel().insertOne(reqObject));
-
-	return promise;
-}
+		.then(reqObject => new getUserModel().save(reqObject));
+		return promise;
+	}
+	else {
+		return new getUserModel().save(reqObject);
+	}
+};
 
 module.exports.checkIfUserExists =
 	(reqObject, next) => {

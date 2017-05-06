@@ -14,6 +14,8 @@ router.get('/find', function(req, res, next) {
 
 router.post('/login', auth.loginUser);
 
-router.post('/register', auth.registerUserLocal);
+router.post('/register',auth.registerUserSocial, auth.registerUserLocal);
+
+router.post('/logout', auth.logoutUser);
 
 module.exports = router;

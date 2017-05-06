@@ -18,6 +18,7 @@ module.exports.getToken = function (headers) {
 module.exports.JWTexcludedUrls = function () {
   return [
     /^\/api\/login/,
-    /^\/api\/register/
+    /^\/api\/register/,
+    /^\/api\/logout/
   ];
 };

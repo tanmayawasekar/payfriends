@@ -7,8 +7,10 @@ module.exports = {
     valueToSend,
     responseObject,
     errMessage,
+    cb
   }) {
     if (condition) {
+      cb();
       responseObject.send(valueToSend);
     } else {
       throw new Error(errMessage);
@@ -40,7 +42,11 @@ module.exports = {
 
   getErrorStatus(err) {
     let status;
+    console.log("err.message ", err.message);
     switch (err.message) {
+      case /You Have Already Registered with\*/:
+        status = 401;
+        break;
       case 'Invalid Credentials':
         status = 401;
         break;
@@ -58,7 +64,8 @@ module.exports = {
           status = 409;
         }
         else {
-          status = 500;
+          status = err.message.indexOf('You Have Already Registered with') !== -1?
+          401 : 500;
         }
         break;
     }
