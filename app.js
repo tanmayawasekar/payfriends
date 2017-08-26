@@ -5,7 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const utils = require('./helpers/utils');
-const token = require('./controlers/token');
+// const token = require('./controlers/token');
 const helmet = require('helmet');
 require('./config/allConfig');
 require('./models/users');
@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //verifyJwtToken
-app.use(token.verifyJwtToken);
+// app.use(token.verifyJwtToken);
 
 //render routes
 app.use('/', index);
