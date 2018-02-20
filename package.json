@@ -15,7 +15,7 @@
     "express": "~4.14.0",
     "gulp": "^3.9.1",
     "gulp-live-server": "^0.0.30",
-    "gulp-watch": "^4.3.11",
+    "gulp-watch": "^5.0.0",
     "helmet": "^3.5.0",
     "jsonwebtoken": "^7.3.0",
     "jwt-refresh-token": "^0.0.4",
