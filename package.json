@@ -20,7 +20,7 @@
     "jsonwebtoken": "^7.3.0",
     "jwt-refresh-token": "^0.0.4",
     "mongodb": "^2.2.25",
-    "morgan": "~1.7.0",
+    "morgan": "~1.9.1",
     "pm2": "^2.4.6",
     "pug": "~2.0.0-beta6",
     "serve-favicon": "~2.3.0"
