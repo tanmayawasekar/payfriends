@@ -16,7 +16,7 @@
     "gulp": "^3.9.1",
     "gulp-live-server": "^0.0.30",
     "gulp-watch": "^4.3.11",
-    "helmet": "^3.5.0",
+    "helmet": "^3.21.1",
     "jsonwebtoken": "^7.3.0",
     "jwt-refresh-token": "^0.0.4",
     "mongodb": "^2.2.25",
