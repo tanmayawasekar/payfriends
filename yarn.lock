@@ -2457,8 +2457,8 @@ performance-now@^0.2.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
 pidusage@^1.1.0:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/pidusage/-/pidusage-1.1.3.tgz#b4929367a8de2a32432d11c28388c468474537fe"
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/pidusage/-/pidusage-1.2.0.tgz#65ee96ace4e08a4cd3f9240996c85b367171ee92"
 
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
