@@ -19,7 +19,7 @@
     "helmet": "^3.5.0",
     "jsonwebtoken": "^7.3.0",
     "jwt-refresh-token": "^0.0.4",
-    "mongodb": "^2.2.25",
+    "mongodb": "^3.1.13",
     "morgan": "~1.7.0",
     "pm2": "^2.4.6",
     "pug": "~2.0.0-beta6",
