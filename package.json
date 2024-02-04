@@ -6,7 +6,7 @@
     "start": "set DEBUG=payfriends:* & node ./bin/www"
   },
   "dependencies": {
-    "babel-eslint": "^7.2.1",
+    "babel-eslint": "^10.1.0",
     "bcrypt": "^1.0.2",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
